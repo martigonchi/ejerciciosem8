@@ -19,19 +19,20 @@ function showData(dataArray) {
 }
 
 // Escribe el código necesario para realizar el fetch al archivo con los datos y mostrar los estudiantes con la función showData
-fetch(data.json)
-  .then(response => {
-    // Verifica si la respuesta es exitosa
-    if (!response.ok) {
-      throw new Error('Network response was not ok ' + response.statusText);
-    }
-    return response.json(); // Convierte la respuesta a JSON
-  })
-  .then(data => {
-    // Llama a la función showData con el array de estudiantes
-    showData(data.students); // Usa data.students para obtener el array de estudiantes
-  })
-  .catch(error => {
-    // Maneja cualquier error que ocurra durante el fetch
-    console.error('There has been a problem with your fetch operation:', error);
-  });
+fetch(DATA_URL)
+.then((res) =>{
+  console.log(res);
+  return res.ok? res.json(): Promise.reject(res); 
+})
+.then(data => {
+ 
+  const students = data.students;
+  showData(students);
+})
+.catch((err) => {
+  console.log(err);
+  let message = err.statusText || "Ocurrió un error";
+  container.innerHTML = `Error ${err.status}: ${message}`;
+})
+.finally(() => 
+  console.log('Se mostrará independientemente')); 
