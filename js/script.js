@@ -27,12 +27,11 @@ fetch(DATA_URL)
 .then(data => {
  
   const students = data.students;
-  showData(students);
-})
+  showData(students); 
 .catch((err) => {
   console.log(err);
   let message = err.statusText || "Ocurrió un error";
   container.innerHTML = `Error ${err.status}: ${message}`;
 })
 .finally(() => 
-  console.log('Se mostrará independientemente')); 
+  console.log('Ejecutando')); 
